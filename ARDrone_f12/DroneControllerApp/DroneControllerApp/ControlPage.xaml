@@ -1,0 +1,207 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:es="clr-namespace:Microsoft.Expression.Shapes;assembly=Microsoft.Expression.Drawing" 
+    x:Class="DroneControllerApp.ControlPage"
+    mc:Ignorable="d" d:DesignWidth="728" d:DesignHeight="480"
+    SupportedOrientations="Landscape"  Orientation="Landscape"
+    shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="DataTemplate1">
+            <Border BorderThickness="3" Background="Black">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding}" d:LayoutOverrides="Width, Height"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+	<phone:PhoneApplicationPage.FontFamily>
+		<StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+	</phone:PhoneApplicationPage.FontFamily>
+	<phone:PhoneApplicationPage.FontSize>
+		<StaticResource ResourceKey="PhoneFontSizeNormal"/>
+	</phone:PhoneApplicationPage.FontSize>
+	<phone:PhoneApplicationPage.Foreground>
+		<StaticResource ResourceKey="PhoneForegroundBrush"/>
+	</phone:PhoneApplicationPage.Foreground>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0">
+        	<Grid.Background>
+        		<ImageBrush ImageSource="grass.jpg" x:Name="VideoImg" />
+        	</Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.188*"/>
+                <RowDefinition Height="0.188*" />
+                <RowDefinition Height="0.188*"/>
+                <RowDefinition Height="0.188*" />
+                <RowDefinition Height="0.252*" />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="IPBox" TextWrapping="Wrap" Text="192.168.1.1" d:LayoutOverrides="Height" Margin="0" Padding="0" FontSize="18.667" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="130" TextAlignment="Center" >
+            	<TextBox.Background>
+            		<SolidColorBrush Color="#BFBABABA"/>
+            	</TextBox.Background>
+            	<TextBox.BorderBrush>
+            		<SolidColorBrush Color="White" Opacity="0.25"/>
+            	</TextBox.BorderBrush>
+            </TextBox>
+            <Button x:Name="TestButton" VerticalAlignment="Center" Click="TestButton_Click" Content="Connect" Grid.Column="4" Margin="0" Padding="0" HorizontalAlignment="Center" FontSize="18.667" Height="60" Width="130" >
+            	<Button.Foreground>
+            		<SolidColorBrush Color="White" Opacity="0.75"/>
+            	</Button.Foreground>
+            	<Button.Background>
+            		<SolidColorBrush Color="#FF680303" Opacity="0.75"/>
+            	</Button.Background>
+            	<Button.BorderBrush>
+            		<SolidColorBrush Color="White" Opacity="0.25"/>
+            	</Button.BorderBrush>
+            </Button>
+
+            <!--<ListBox HorizontalAlignment="Left" x:Name="TraceBox" VerticalAlignment="Top" ItemsSource="{Binding}" Grid.Row="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemTemplate="{StaticResource DataTemplate1}" Grid.ColumnSpan="4" Grid.RowSpan="7" />-->
+            <Button Grid.ColumnSpan="1" Height="90" Margin="0" x:Name="buttonLeft" VerticalAlignment="Center" Width="90" Grid.Row="2" Foreground="White" Background="{x:Null}" ManipulationStarted="buttonLeft_ManipulationStarted" ManipulationCompleted="buttonLeft_ManipulationCompleted" Padding="0" BorderBrush="{x:Null}" >
+            	<es:BlockArrow Height="60" Orientation="Down" Stroke="Black" UseLayoutRounding="False" Width="60" RenderTransformOrigin="0.5,0.5">
+            		<es:BlockArrow.RenderTransform>
+            			<CompositeTransform Rotation="90"/>
+            		</es:BlockArrow.RenderTransform>
+            		<es:BlockArrow.Fill>
+            			<SolidColorBrush Color="#FF70707E" Opacity="0.75"/>
+            		</es:BlockArrow.Fill>
+            	</es:BlockArrow>
+            </Button>
+            <Button Grid.ColumnSpan="1" Height="90" Margin="0" x:Name="buttonUp" Width="90" Grid.Row="0" Grid.Column="6" Background="{x:Null}" ManipulationCompleted="buttonUp_ManipulationCompleted" ManipulationStarted="buttonUp_ManipulationStarted" Padding="0" BorderBrush="{x:Null}" Foreground="White" Grid.RowSpan="2" >
+            	<es:BlockArrow Orientation="Down" Stroke="Black" UseLayoutRounding="False" Width="60" Height="60" RenderTransformOrigin="0.5,0.5">
+            		<es:BlockArrow.RenderTransform>
+            			<CompositeTransform Rotation="180"/>
+            		</es:BlockArrow.RenderTransform>
+            		<es:BlockArrow.Fill>
+            			<SolidColorBrush Color="#FF70707E" Opacity="0.75"/>
+            		</es:BlockArrow.Fill>
+            	</es:BlockArrow>
+            </Button>
+            <Button Margin="0" x:Name="buttonDown" Grid.Row="3" Grid.Column="6" Foreground="{x:Null}" Background="{x:Null}" ManipulationStarted="buttonDown_ManipulationStarted" ManipulationCompleted="buttonDown_ManipulationCompleted" Padding="0" BorderBrush="{x:Null}" Grid.RowSpan="2" Width="90" Height="90" >
+            	<es:BlockArrow Margin="0" Orientation="Down" Stroke="Black" UseLayoutRounding="False" d:LayoutOverrides="Margin" Height="60" Width="60">
+            		<es:BlockArrow.Fill>
+            			<SolidColorBrush Color="#FF70707E" Opacity="0.75"/>
+            		</es:BlockArrow.Fill>
+            	</es:BlockArrow>
+            </Button>
+            <Button Grid.ColumnSpan="1" Height="90" Margin="0" x:Name="buttonRight" VerticalAlignment="Center" Width="90" Grid.Row="2" Grid.Column="6" Foreground="White" Background="{x:Null}" ManipulationStarted="buttonRight_ManipulationStarted" ManipulationCompleted="buttonRight_ManipulationCompleted" Padding="0" BorderBrush="{x:Null}" >
+            	<es:BlockArrow Height="60" Orientation="Down" Stroke="Black" UseLayoutRounding="False" Width="60" RenderTransformOrigin="0.5,0.5">
+            		<es:BlockArrow.RenderTransform>
+            			<CompositeTransform Rotation="270"/>
+            		</es:BlockArrow.RenderTransform>
+            		<es:BlockArrow.Fill>
+            			<SolidColorBrush Color="#FF70707E" Opacity="0.75"/>
+            		</es:BlockArrow.Fill>
+            	</es:BlockArrow>
+            </Button>
+            <Button Margin="0,-15,0,0" x:Name="buttonGazUp" Padding="0" ManipulationStarted="buttonGazUp_ManipulationStarted" ManipulationCompleted="buttonGazUp_ManipulationCompleted" Width="90" Height="90" Grid.Row="1" BorderBrush="{x:Null}" Foreground="White" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            	<es:RegularPolygon Height="45" InnerRadius="1" PointCount="3" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="50">
+            		<es:RegularPolygon.Fill>
+            			<SolidColorBrush Color="#FF397F1C" Opacity="0.75"/>
+            		</es:RegularPolygon.Fill>
+            	</es:RegularPolygon>
+            </Button>
+            <Button Grid.Row="3" Margin="0,15,0,0" x:Name="buttonGazDown" Padding="0" ManipulationStarted="buttonGazDown_ManipulationStarted" ManipulationCompleted="buttonGazDown_ManipulationCompleted" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="90" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            	<Button.Foreground>
+            		<SolidColorBrush Color="White" Opacity="0.75"/>
+            	</Button.Foreground>
+            	<es:RegularPolygon Height="45" InnerRadius="1" PointCount="3" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="50" RenderTransformOrigin="0.5,0.5">
+            		<es:RegularPolygon.RenderTransform>
+            			<CompositeTransform Rotation="180"/>
+            		</es:RegularPolygon.RenderTransform>
+            		<es:RegularPolygon.Fill>
+            			<SolidColorBrush Color="#FF720909" Opacity="0.75"/>
+            		</es:RegularPolygon.Fill>
+            	</es:RegularPolygon>
+            </Button>
+            <Button Content="Take Off" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalAlignment="Center" Margin="0" x:Name="buttonTakeOff" VerticalAlignment="Center" Padding="0" ManipulationStarted="buttonTakeOff_ManipulationStarted" ManipulationCompleted="buttonTakeOff_ManipulationCompleted" Grid.Column="2" Width="160" >
+            	<Button.BorderBrush>
+            		<SolidColorBrush Color="White" Opacity="0.25"/>
+            	</Button.BorderBrush>
+            	<Button.Background>
+            		<SolidColorBrush Color="#FF46AD1B" Opacity="0.75"/>
+            	</Button.Background>
+            	<Button.Foreground>
+            		<SolidColorBrush Color="White" Opacity="0.75"/>
+            	</Button.Foreground>
+            </Button>
+            <Button Content="Land" Grid.ColumnSpan="2" Grid.RowSpan="1" Margin="0" x:Name="buttonLand" VerticalAlignment="Bottom" Width="160" Grid.Column="2" Padding="0" ManipulationStarted="buttonLand_ManipulationStarted" ManipulationCompleted="buttonLand_ManipulationCompleted" Grid.Row="4" HorizontalAlignment="Center" >
+            	<Button.Foreground>
+            		<SolidColorBrush Color="White" Opacity="0.75"/>
+            	</Button.Foreground>
+            	<Button.BorderBrush>
+            		<SolidColorBrush Color="White" Opacity="0.25"/>
+            	</Button.BorderBrush>
+            	<Button.Background>
+            		<SolidColorBrush Color="#FF970C0C" Opacity="0.75"/>
+            	</Button.Background>
+            </Button>
+            <Button Grid.RowSpan="1" HorizontalAlignment="Center" Margin="0" x:Name="ButtonAcceleroControl" VerticalAlignment="Center" Width="Auto" Grid.Row="4" Padding="0" ManipulationStarted="ButtonAcceleroControl_ManipulationStarted" ManipulationCompleted="ButtonAcceleroControl_ManipulationCompleted" BorderBrush="{x:Null}" >
+            	<es:Arc ArcThickness="20" ArcThicknessUnit="Pixel" EndAngle="360" Stretch="None" Stroke="Black" StartAngle="0" UseLayoutRounding="False" Width="60" Height="60">
+            		<es:Arc.Fill>
+            			<RadialGradientBrush>
+            				<GradientStop Color="#FF3E3AAB" Offset="0.428"/>
+            				<GradientStop Color="#FFE5F96F" Offset="0.77"/>
+            				<GradientStop Color="#FFCE3B1A" Offset="1"/>
+            			</RadialGradientBrush>
+            		</es:Arc.Fill>
+            	</es:Arc>
+            </Button>
+            <TextBox x:Name="VideoComingSoon" TextWrapping="Wrap" Text="( Video Coming Soon)" Margin="0" Padding="0" FontSize="26.667" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Background="{x:Null}" Grid.Row="1" Grid.ColumnSpan="4" Foreground="Red" BorderBrush="{x:Null}" Grid.RowSpan="3" />
+            <!--<Image Grid.ColumnSpan="4" Grid.RowSpan="1" Height="Auto" HorizontalAlignment="Center" Name="VideoFeedImage" Stretch="Fill" VerticalAlignment="Center" Width="Auto" Grid.Row="4"  />-->
+            <!--MinHeight="240" MinWidth="320"-->
+        </Grid>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0">
+        	<TextBlock x:Name="ApplicationTitle" Style="{StaticResource PhoneTextNormalStyle}" Margin="10,0,0,0"><Run Text="Drone Controller -- "/><Run Text="Texas A&amp;M University"/></TextBlock>
+        	<TextBlock x:Name="PageTitle" Margin="15,0,0,0" Style="{StaticResource PhoneTextTitle1Style}" HorizontalAlignment="Left" Foreground="White" ><Run Text="AR."/><Run Text="UAV">
+        			<Run.Foreground>
+        				<SolidColorBrush Color="#FF6490D8">
+        					<SolidColorBrush.RelativeTransform>
+        						<MatrixTransform Matrix="Identity"/>
+        					</SolidColorBrush.RelativeTransform>
+        					<SolidColorBrush.Transform>
+        						<MatrixTransform Matrix="Identity"/>
+        					</SolidColorBrush.Transform>
+        				</SolidColorBrush>
+        			</Run.Foreground>
+        		</Run><Run Text=" ManualFlight"/></TextBlock>
+        </StackPanel>
+    </Grid>
+
+</phone:PhoneApplicationPage>

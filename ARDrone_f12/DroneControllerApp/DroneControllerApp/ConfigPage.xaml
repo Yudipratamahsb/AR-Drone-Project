@@ -1,0 +1,79 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="DroneControllerApp.ConfigPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="728"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ScrollViewer Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="scrollViewer1" VerticalAlignment="Stretch" Width="Auto">
+                <StackPanel Height="Auto" Name="stackPanel1" Width="Auto">
+                    <TextBlock Height="30" Name="droneTiltLabel" Text="AR.Drone Tilt Max" />
+                    <Slider Height="84" Name="droneTilt" Width="600" HorizontalAlignment="Left" IsDirectionReversed="False" Maximum="30" ValueChanged="droneTilt_ValueChanged" />
+                    
+                    <TextBlock Height="30" Name="phoneTiltLabel" Text="Phone Tilt Max" />
+                    <Slider Height="84" Name="phoneTilt" Width="600" HorizontalAlignment="Left" Maximum="30" ValueChanged="phoneTilt_ValueChanged" VerticalAlignment="Stretch" />
+                    
+                    <TextBlock Height="30" Name="phoneTiltThresholdLabel" Text="PhoneTiltThreshold" />
+                    <Slider Height="84" Name="phoneTiltThreshold" Width="600" HorizontalAlignment="Left" ValueChanged="phoneTiltThreshold_ValueChanged" />
+                    
+                    <TextBlock Height="30" Name="YawSpeedLabel" Text="YawSpeed" />
+                    <Slider Height="84" Name="YawSpeed" Width="600" HorizontalAlignment="Left" Maximum="180" ValueChanged="YawSpeed_ValueChanged" />
+                    
+                    <TextBlock Height="30" Name="VerticalSpeedLabel" Text="VerticalSpeed" />
+                    <Slider Height="84" Name="VerticalSpeed" Width="600" HorizontalAlignment="Left" Minimum="200" Maximum="2000" ValueChanged="VerticalSpeed_ValueChanged" />
+                    
+                    <TextBlock Height="30" Name="MaxAltitudeLabel" Text="MaxAltitude" />
+                    <Slider Height="84" Name="MaxAltitude" Width="600" HorizontalAlignment="Left" Maximum="5000" Minimum="500" ValueChanged="MaxAltitude_ValueChanged" />
+                    <Button Content="Done" Height="71" x:Name="button1" Width="160" HorizontalAlignment="Center" Click="button1_Click" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0">
+        	<TextBlock x:Name="ApplicationTitle" Style="{StaticResource PhoneTextNormalStyle}" Margin="10,0,0,0"><Run Text="Drone Controller -- "/><Run Text="Texas A&amp;M University"/></TextBlock>
+        	<TextBlock x:Name="PageTitle" Margin="15,0,0,0" Style="{StaticResource PhoneTextTitle1Style}" HorizontalAlignment="Left" Foreground="White" ><Run Text="AR."/><Run Text="UAV">
+        			<Run.Foreground>
+        				<SolidColorBrush Color="#FF6987BF">
+        					<SolidColorBrush.RelativeTransform>
+        						<MatrixTransform Matrix="Identity"/>
+        					</SolidColorBrush.RelativeTransform>
+        					<SolidColorBrush.Transform>
+        						<MatrixTransform Matrix="Identity"/>
+        					</SolidColorBrush.Transform>
+        				</SolidColorBrush>
+        			</Run.Foreground>
+        		</Run><Run Text=" ConfigSettings"/></TextBlock>
+        </StackPanel>
+    </Grid>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</phone:PhoneApplicationPage>
